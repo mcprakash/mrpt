@@ -20,6 +20,14 @@ namespace mrpt
     {
         namespace pnp
         {
+            /**
+             * @class CPnP
+             * @author Chandra Mangipudi
+             * @date 28/07/16
+             * @file pnp_algos.h
+             * @brief Class CPnP is a Perspective-n-Point (PnP) Algorithm toolkit comprising of state of the art PnP Algorithms
+             *        used to compute pose (6-DOF) using camera measurements of a known landmark.
+             */
             class CPnP
             {
                 public:

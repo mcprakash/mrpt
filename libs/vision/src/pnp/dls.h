@@ -82,7 +82,11 @@
                 cv::Mat C_est__, t_est__;                // optimal found solution
                 double cost__;                            // optimal found solution
             };
-
+            
+            
+            /**
+             * \cond INTERNAL_FUNC_DLS
+             */
             class EigenvalueDecomposition {
             private:
 
@@ -721,6 +725,7 @@
                     // Deallocate the memory by releasing all internal working data.
                     release();
                 }
+                
 
             public:
                 EigenvalueDecomposition()
@@ -773,6 +778,10 @@
                 // Returns the eigenvectors of the Eigenvalue Decomposition.
                 cv::Mat eigenvectors() { return _eigenvectors; }
             };
+            
+            /**
+             * \endcond
+             */
         }
     }
 #endif // OPENCV_Check

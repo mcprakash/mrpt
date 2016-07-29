@@ -29,10 +29,14 @@ using namespace std;
 #include "lhm.h"
 #include "rpnp.h"
 
+/**
+ * \if MRPT_HAS_OPENCV
+ * \endif
+ */
 #if MRPT_HAS_OPENCV
 
     /**
-     * @brief Direct Least Squares (DLS) - PnP : Algorithm formulates position as a function of rotation. 
+     * @brief \cite hesch Direct Least Squares (DLS) - PnP : Algorithm formulates position as a function of rotation. 
      *        Use Cayley's rotation theorem to represent the rotation using parameters ($s_1, s_2, s_3$).
      *        Solve the rotation using multi-variate polynomial expressions
      *        
@@ -42,6 +46,8 @@ using namespace std;
      * @param[in] cam_intrinsic Camera Intrinsic matrix
      * @param[out] pose_mat Output pose vector 6X1, pose_mat[0:2]-> Translation, pose_mat[3:5] -> Quaternion vector component 
      * @return success flag
+     * 
+     * Additional Dependency - OpenCV (Mat) and the current implementation is an Eigen wrapper for the OpenCV Calib3d - DLS-PnP function
      */
     int CPnP::CPnP_dls(const Eigen::Ref<Eigen::MatrixXd> obj_pts, const Eigen::Ref<Eigen::MatrixXd> img_pts, int n, const Eigen::Ref<Eigen::MatrixXd> cam_intrinsic, Eigen::Ref<Eigen::MatrixXd> pose_mat){
         
@@ -67,14 +73,16 @@ using namespace std;
     }
 
     /**
-     * @brief Efficient-PnP (EPnP) - Algorithm takes 4 control points based on n points and uses the control points to compute the pose
+     * @brief \cite lepetit Efficient-PnP (EPnP) - Algorithm takes 4 control points based on n points and uses the control points to compute the pose
      * 
-     * @param[in] obj_pts Object points in Camera Co-ordinate system {C} nX3 (only 4 points used) array [p_x, p_y, p_z]
+     * @param[in] obj_pts Object points in Camera Co-ordinate system {C} nX3 (only 4 points thused) array [p_x, p_y, p_z]
      * @param[in] img_pts Image points in pixels nX3 (only 4 points used) array containing pixel data from camera [u, v, 1]
      * @param[in] n number of 2D-3D correspondences
      * @param[in] cam_intrinsic Camera Intrinsic matrix
      * @param[out] pose_mat Output pose vector 6X1, pose_mat[0:2]-> Translation, pose_mat[3:5] -> Quaternion vector component 
      * @return success flag
+     * 
+     * Additional Dependency - OpenCV (Mat) and the current implementation is an Eigen wrapper for the OpenCV Calib3d - EPnP function
      */
     int CPnP::CPnP_epnp(const Eigen::Ref<Eigen::MatrixXd> obj_pts, const Eigen::Ref<Eigen::MatrixXd> img_pts, int n, const Eigen::Ref<Eigen::MatrixXd> cam_intrinsic, Eigen::Ref<Eigen::MatrixXd> pose_mat){
         
@@ -100,7 +108,7 @@ using namespace std;
     }
 
     /**
-     * @brief \cite Kneip2014 Unified-PnP (UPnP) : Algorithm to compute pose from unknown camera intrinsic matrix
+     * @brief \cite Kneip2014 Unified-PnP (UPnP) : Algorithm to compute pose using polynomial solution of quaternions
      * 
      * @param[in] obj_pts Object points in Camera Co-ordinate system {C} nX3 (only 4 points used) array [p_x, p_y, p_z]
      * @param[in] img_pts Image points in pixels nX3 (only 4 points used) array containing pixel data from camera [u, v, 1]
@@ -108,6 +116,8 @@ using namespace std;
      * @param[in] cam_intrinsic Camera Intrinsic matrix
      * @param[out] pose_mat Output pose vector 6X1, pose_mat[0:2]-> Translation, pose_mat[3:5] -> Quaternion vector component 
      * @return success flag
+     * 
+     * Additional Dependency - OpenCV (Mat) and the current implementation is an Eigen wrapper for the OpenCV Calib3d - UPnP function
      */
     int CPnP::CPnP_upnp(const Eigen::Ref<Eigen::MatrixXd> obj_pts, const Eigen::Ref<Eigen::MatrixXd> img_pts, int n, const Eigen::Ref<Eigen::MatrixXd> cam_intrinsic, Eigen::Ref<Eigen::MatrixXd> pose_mat){
         
