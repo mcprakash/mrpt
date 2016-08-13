@@ -20,6 +20,11 @@ namespace mrpt
     {
         namespace pnp
         {
+            /** \addtogroup pnp Perspective-n-Point pose estimation
+             *  \ingroup mrpt_vision_grp
+             *  @{  
+             */
+             
             /**
              * @class CPnP
              * @author Chandra Mangipudi
@@ -52,8 +57,9 @@ namespace mrpt
             
                     int CPnP_lhm(const Eigen::Ref<Eigen::MatrixXd> obj_pts, const Eigen::Ref<Eigen::MatrixXd> img_pts, int n, const Eigen::Ref<Eigen::MatrixXd> cam_intrinsic, Eigen::Ref<Eigen::MatrixXd> pose_mat);
                     
-                    };
+            };
             
+            /** @}  */ // end of grouping
         }
     }
 }
